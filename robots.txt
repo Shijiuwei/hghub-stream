@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+Disallow: /temp_work/
+
+Sitemap: https://shijiuwei.github.io/hghub-stream/sitemap.xml

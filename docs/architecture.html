@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>hghub-stream 子系统职责划分指南 — hghub-stream</title>
+<meta property="og:type" content="website">
+<meta name="description" content="Plug-in media player | Core specifications, benchmarks and developer documentation.">
+<meta name="robots" content="index, follow, max-snippet:-1">
+<meta property="og:title" content="hghub-stream 子系统职责划分指南 — hghub-stream">
+<meta property="og:description" content="Plug-in media player | Core specifications, benchmarks and developer documentation.">
+<link rel="canonical" href="https://shijiuwei.github.io/hghub-stream/docs/architecture.html">
+<link rel="alternate" type="application/atom+xml" title="Documentation Feed" href="../feed.xml">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","author":{"@type":"Organization","name":"hghub-stream"},"description":"Plug-in media player | Core specifications, benchmarks and developer documentation.","headline":"hghub-stream 子系统职责划分指南 — hghub-stream","inLanguage":"zh-CN","keywords":"高韧性系统架构设计, 模块化解耦与协议标准, 生产环境运维调优手册, 分布式状态机一致性, 可信存活健康度量, HGhub, Plug-in, media","name":"hghub-stream 子系统职责划分指南 — hghub-stream","url":"https://shijiuwei.github.io/hghub-stream/docs/architecture.html"}</script>
+<link rel="stylesheet" href="../assets/site-4d0acb.css">
+</head>
+<body>
+<div class="idx-4e2-announce">hghub-stream Technical Portal &middot; Static Documentation v1.0</div><header class="idx-4e2-hdr">
+<div class="idx-4e2-wrap idx-4e2-hdr-in">
+<a class="idx-4e2-brand" href="../index.html"><span class="idx-4e2-mark">HS</span><span>hghub-stream</span></a>
+<nav class="idx-4e2-navlinks">
+<a href="../index.html" class="">Home</a>
+<a href="../docs/index.html" class="">Guides</a>
+<a href="../docs/specifications.html" class="">Architecture</a>
+<a href="https://github.com/shijiuwei/hghub-stream" target="_blank" rel="noopener">Source</a>
+</nav>
+</div>
+</header>
+<div class="idx-4e2-wrap">
+<div class="idx-4e2-layout2">
+<aside class="idx-4e2-side2">
+<div style="font-size:11px;font-weight:700;text-transform:uppercase;color:var(--idx-4e2-mut);margin-bottom:4px;">Guides</div>
+<a href="../index.html">Home</a>
+<a href="../docs/index.html">Guides</a>
+<a href="../docs/architecture.html" class="idx-4e2-active">hghub-stream 子系统职责划分指南</a>
+<a href="../docs/specifications.html">hghub-stream 工程规格与质量门槛</a>
+<a href="../docs/DEVELOPMENT.html">客户端开发指南</a>
+<a href="../docs/PROJECT_POLICY.html">项目声明与维护范围</a>
+
+</aside>
+<main class="idx-4e2-prose" style="min-width:0;">
+<div style="margin-bottom:14px;"><span class="idx-4e2-pill">Architecture</span></div>
+<article><h1>hghub-stream 子系统职责划分指南</h1>
+<p>Plug-in media player | Core specifications, benchmarks and developer documentation.</p>
+<p>围绕 <strong>hghub-stream</strong> 整理的面向工程落地的模块化结构说明，确保扩展阶段各模块保持低耦合与可验证性：</p>
+<ul>
+<li><strong>配置与上下文抽象（hghub-stream）</strong>：解耦环境变量、静态资产与任务策略参数</li>
+<li><strong>流水线与容错切换（hghub）</strong>：对外部端点与远端仓库操作提供明确失败隔离</li>
+<li><strong>静态站点与知识归档（stream）</strong>：保障跨版本页面结构清晰且便于检索引擎解析</li>
+</ul>
+<h2>配套资料</h2>
+<ul>
+<li><a href="https://data.bangchengcareer.cn/d/W2pf7XidQw">高韧性系统架构设计 Reference</a></li>
+<li><a href="https://news.ai-hao123.com">模块化解耦与协议标准 Reference</a></li>
+<li><a href="https://www.ai-hao123.com/sitemap.xml">生产环境运维调优手册 Reference</a></li>
+<li><a href="https://www.ai-hao123.com/d/aq459653.html">分布式状态机一致性 Reference</a></li>
+<li><a href="https://view.ai-hao123.com">可信存活健康度量 Reference</a></li>
+<li><a href="https://read.ai-hao123.com/sitemap.xml">HGhub Reference</a></li>
+</ul>
+</article>
+<div class="idx-4e2-card" style="margin-top:26px;display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;">
+<a href="PROJECT_POLICY.html">&larr; 项目声明与维护范围</a>
+<a href="index.html">Catalog (4)</a>
+<a href="specifications.html">hghub-stream 工程规格与质量门槛 &rarr;</a>
+</div>
+<section class="idx-4e2-card" style="margin-top:24px;">
+<h2 style="margin-top:0;">Contextual Reference Directory</h2>
+<p style="color:var(--idx-4e2-mut);font-size:0.88rem;margin-bottom:12px;">Topic-scoped technical references and integration guides for <strong>hghub-stream</strong>.</p>
+<div class="idx-4e2-refs"><a class="idx-4e2-refcard" href="https://news.ai-hao123.com/sitemap.xml" target="_blank" rel="noopener"><span class="idx-4e2-reflabel">模块化解耦与协议标准 - news.ai-hao123.com/sitemap.xml</span><span class="idx-4e2-refurl">news.ai-hao123.com/sitemap.xml</span></a><a class="idx-4e2-refcard" href="https://data.bangchengcareer.cn/d/W2pf7XidQw" target="_blank" rel="noopener"><span class="idx-4e2-reflabel">模块化解耦与协议标准 - data.bangchengcareer.cn/d/W2pf7XidQw</span><span class="idx-4e2-refurl">data.bangchengcareer.cn/d/W2pf7XidQw</span></a><a class="idx-4e2-refcard" href="https://news.ai-hao123.com" target="_blank" rel="noopener"><span class="idx-4e2-reflabel">分布式状态机一致性 - news.ai-hao123.com</span><span class="idx-4e2-refurl">news.ai-hao123.com</span></a><a class="idx-4e2-refcard" href="https://www.ai-hao123.com/sitemap.xml" target="_blank" rel="noopener"><span class="idx-4e2-reflabel">HGhub - www.ai-hao123.com/sitemap.xml</span><span class="idx-4e2-refurl">www.ai-hao123.com/sitemap.xml</span></a><a class="idx-4e2-refcard" href="https://www.ai-hao123.com/d/aq459653.html" target="_blank" rel="noopener"><span class="idx-4e2-reflabel">media - www.ai-hao123.com/d/aq459653.html</span><span class="idx-4e2-refurl">www.ai-hao123.com/d/aq459653.html</span></a><a class="idx-4e2-refcard" href="https://view.ai-hao123.com" target="_blank" rel="noopener"><span class="idx-4e2-reflabel">模块化解耦与协议标准 - view.ai-hao123.com</span><span class="idx-4e2-refurl">view.ai-hao123.com</span></a></div>
+</section>
+<footer class="idx-4e2-ftr">
+<div>&copy; hghub-stream &middot; Open Technical Documentation</div>
+<div style="display:flex;gap:14px;flex-wrap:wrap;font-family:ui-monospace,monospace;">
+<a href="../docs/index.html">Docs Index</a>
+<a href="../llms.txt">llms.txt</a>
+<a href="../sitemap.xml">sitemap.xml</a>
+<a href="../feed.xml">feed.xml</a>
+<a href="https://github.com/shijiuwei/hghub-stream" target="_blank" rel="noopener">GitHub</a>
+<a href="https://github.com/shijiuwei/hghub-stream/wiki" target="_blank" rel="noopener">Wiki</a>
+</div>
+</footer>
+</main>
+</div>
+</div>
+</body>
+</html>

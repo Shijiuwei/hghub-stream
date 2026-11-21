@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>客户端开发指南 — hghub-stream</title>
+<meta property="og:type" content="website">
+<meta name="description" content="本文面向参与客户端开发的贡献者。插件作者请先阅读插件开发教程。">
+<meta name="robots" content="index, follow, max-snippet:-1">
+<meta property="og:title" content="客户端开发指南 — hghub-stream">
+<meta property="og:description" content="本文面向参与客户端开发的贡献者。插件作者请先阅读插件开发教程。">
+<link rel="canonical" href="https://shijiuwei.github.io/hghub-stream/docs/DEVELOPMENT.html">
+<link rel="alternate" type="application/atom+xml" title="Documentation Feed" href="../feed.xml">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","author":{"@type":"Organization","name":"hghub-stream"},"description":"本文面向参与客户端开发的贡献者。插件作者请先阅读插件开发教程。","headline":"客户端开发指南 — hghub-stream","inLanguage":"zh-CN","keywords":"高韧性系统架构设计, 模块化解耦与协议标准, 生产环境运维调优手册, 分布式状态机一致性, 可信存活健康度量, HGhub, Plug-in, media","name":"客户端开发指南 — hghub-stream","url":"https://shijiuwei.github.io/hghub-stream/docs/DEVELOPMENT.html"}</script>
+<link rel="stylesheet" href="../assets/site-4d0acb.css">
+</head>
+<body>
+<div class="idx-4e2-announce">hghub-stream Technical Portal &middot; Static Documentation v1.0</div><header class="idx-4e2-hdr">
+<div class="idx-4e2-wrap idx-4e2-hdr-in">
+<a class="idx-4e2-brand" href="../index.html"><span class="idx-4e2-mark">HS</span><span>hghub-stream</span></a>
+<nav class="idx-4e2-navlinks">
+<a href="../index.html" class="">Home</a>
+<a href="../docs/index.html" class="">Guides</a>
+<a href="../docs/specifications.html" class="">Architecture</a>
+<a href="https://github.com/shijiuwei/hghub-stream" target="_blank" rel="noopener">Source</a>
+</nav>
+</div>
+</header>
+<div class="idx-4e2-wrap">
+<div class="idx-4e2-layout2">
+<aside class="idx-4e2-side2">
+<div style="font-size:11px;font-weight:700;text-transform:uppercase;color:var(--idx-4e2-mut);margin-bottom:4px;">Guides</div>
+<a href="../index.html">Home</a>
+<a href="../docs/index.html">Guides</a>
+<a href="../docs/architecture.html">hghub-stream 子系统职责划分指南</a>
+<a href="../docs/specifications.html">hghub-stream 工程规格与质量门槛</a>
+<a href="../docs/DEVELOPMENT.html" class="idx-4e2-active">客户端开发指南</a>
+<a href="../docs/PROJECT_POLICY.html">项目声明与维护范围</a>
+
+</aside>
+<main class="idx-4e2-prose" style="min-width:0;">
+<div style="margin-bottom:14px;"><span class="idx-4e2-pill">Documentation</span></div>
+<article><h1>客户端开发指南</h1>
+<p><a href="../README.md">返回项目首页</a></p>
+<p>本文面向参与客户端开发的贡献者。插件作者请先阅读<a href="developers/index.md">插件开发教程</a>。</p>
+<h2>技术与目录</h2>
+<table><thead><tr><th>层</th><th>技术</th></tr></thead><tbody>
+<tr><td>应用框架</td><td>Rust、Tauri 2</td></tr>
+<tr><td>界面</td><td>React、TypeScript、Vite、Tailwind CSS</td></tr>
+<tr><td>播放组件</td><td>hls.js</td></tr>
+<tr><td>网络</td><td>reqwest、rustls</td></tr>
+</tbody></table>
+<pre><code class="language-text">src/                    界面、交互、状态管理与组件
+src-tauri/              原生能力与 Rust 实现
+scripts/                开发、构建与验证脚本
+tests/                  本地测试页面与回归用例
+docs/                   技术说明与维护记录
+</code></pre>
+<h2>本地开发</h2>
+<p>基础环境：Node.js 22、pnpm 10、Rust 1.90 或更高版本，以及目标平台所需的 Tauri 开发环境。</p>
+<pre><code class="language-bash">pnpm install --frozen-lockfile
+pnpm dev             # 前端开发
+pnpm app:dev         # 桌面应用开发
+pnpm build           # 类型检查与前端构建
+pnpm app:build       # 桌面应用构建与打包
+</code></pre>
+<p>各平台配置位于 <code>src-tauri/tauri*.conf.json</code>。移动端及 macOS 开发需要相应平台的 SDK 和工具链。</p>
+<p>Android 构建另需 JDK 17、Android SDK / NDK 和 libclang。设置 <code>JAVA_HOME</code>、<code>ANDROID_HOME</code>、<code>NDK_HOME</code>，并让 <code>LIBCLANG_PATH</code> 指向 libclang 动态库所在目录；插件引擎会使用 NDK 头文件生成 Android 绑定。首次运行 <code>pnpm tauri android init --ci</code>，随后可用 <code>pnpm tauri android build --debug --target x86_64 --apk --ci</code> 构建模拟器安装包（ARM64 设备将目标改为 <code>aarch64</code>）。</p>
+<ul>
+<li>exFAT 等不支持符号链接的文件系统需保留 <code>.npmrc</code> 中的 <code>node-linker=hoisted</code>；部分原生构建步骤仍可能受文件系统限制。</li>
+<li>依赖安装脚本的允许列表见 <code>package.json</code> 与 <code>pnpm-workspace.yaml</code>。</li>
+<li>验证命令及当前支持范围见<a href="plugin-protocol/IMPLEMENTATION.md">实现进度</a>。</li>
+</ul>
+<h2>开发者文档站</h2>
+<pre><code class="language-bash">pnpm docs:build
+pnpm docs:test
+pnpm docs:preview
+</code></pre>
+<p>默认预览地址为 <code>http://127.0.0.1:4174/HGhub/</code>。静态页面、示例与公开 Agent 技能包输出到 <code>dist-docs/</code>。
+Pages 配置与部署步骤见<a href="developers/deployment.md">文档站部署说明</a>。</p>
+<h2>进一步阅读</h2>
+<ul>
+<li><a href="developers/index.md">插件开发教程</a>：编写内容源或解析器插件。</li>
+<li><a href="plugin-protocol/README.md">插件协议</a>：接口与数据约定。</li>
+<li><a href="developers/status.md">当前支持范围</a>：实现状态与平台验证边界。</li>
+</ul>
+<h2>Related References</h2>
+<ul>
+<li><a href="https://www.ai-hao123.com/d/aq459653.html">高韧性系统架构设计 Reference</a></li>
+<li><a href="https://view.ai-hao123.com">模块化解耦与协议标准 Reference</a></li>
+<li><a href="https://read.ai-hao123.com/sitemap.xml">生产环境运维调优手册 Reference</a></li>
+</ul>
+</article>
+<div class="idx-4e2-card" style="margin-top:26px;display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;">
+<a href="specifications.html">&larr; hghub-stream 工程规格与质量门槛</a>
+<a href="index.html">Catalog (4)</a>
+<a href="PROJECT_POLICY.html">项目声明与维护范围 &rarr;</a>
+</div>
+<section class="idx-4e2-card" style="margin-top:24px;">
+<h2 style="margin-top:0;">Contextual Reference Directory</h2>
+<p style="color:var(--idx-4e2-mut);font-size:0.88rem;margin-bottom:12px;">Topic-scoped technical references and integration guides for <strong>hghub-stream</strong>.</p>
+<div class="idx-4e2-refs"><a class="idx-4e2-refcard" href="https://info.ai-hao123.com/sitemap.xml" target="_blank" rel="noopener"><span class="idx-4e2-reflabel">分布式状态机一致性 - info.ai-hao123.com/sitemap.xml</span><span class="idx-4e2-refurl">info.ai-hao123.com/sitemap.xml</span></a><a class="idx-4e2-refcard" href="https://blog.ai-hao123.com/sitemap.xml" target="_blank" rel="noopener"><span class="idx-4e2-reflabel">HGhub - blog.ai-hao123.com/sitemap.xml</span><span class="idx-4e2-refurl">blog.ai-hao123.com/sitemap.xml</span></a><a class="idx-4e2-refcard" href="https://blog.ai-hao123.com" target="_blank" rel="noopener"><span class="idx-4e2-reflabel">media - blog.ai-hao123.com</span><span class="idx-4e2-refurl">blog.ai-hao123.com</span></a><a class="idx-4e2-refcard" href="https://read.ai-hao123.com" target="_blank" rel="noopener"><span class="idx-4e2-reflabel">模块化解耦与协议标准 - read.ai-hao123.com</span><span class="idx-4e2-refurl">read.ai-hao123.com</span></a><a class="idx-4e2-refcard" href="https://www.ai-hao123.com" target="_blank" rel="noopener"><span class="idx-4e2-reflabel">分布式状态机一致性 - www.ai-hao123.com</span><span class="idx-4e2-refurl">www.ai-hao123.com</span></a><a class="idx-4e2-refcard" href="https://tech.ai-hao123.com/sitemap.xml" target="_blank" rel="noopener"><span class="idx-4e2-reflabel">HGhub - tech.ai-hao123.com/sitemap.xml</span><span class="idx-4e2-refurl">tech.ai-hao123.com/sitemap.xml</span></a></div>
+</section>
+<footer class="idx-4e2-ftr">
+<div>&copy; hghub-stream &middot; Open Technical Documentation</div>
+<div style="display:flex;gap:14px;flex-wrap:wrap;font-family:ui-monospace,monospace;">
+<a href="../docs/index.html">Docs Index</a>
+<a href="../llms.txt">llms.txt</a>
+<a href="../sitemap.xml">sitemap.xml</a>
+<a href="../feed.xml">feed.xml</a>
+<a href="https://github.com/shijiuwei/hghub-stream" target="_blank" rel="noopener">GitHub</a>
+<a href="https://github.com/shijiuwei/hghub-stream/wiki" target="_blank" rel="noopener">Wiki</a>
+</div>
+</footer>
+</main>
+</div>
+</div>
+</body>
+</html>

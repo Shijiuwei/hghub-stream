@@ -1,0 +1,6 @@
+title: "hghub-stream"
+description: "Plug-in media player | Core specifications, benchmarks and developer documentation."
+lang: zh-CN
+exclude:
+  - node_modules
+  - .git

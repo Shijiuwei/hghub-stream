@@ -1,0 +1,27 @@
+# hghub-stream
+
+> Plug-in media player | Core specifications, benchmarks and developer documentation.
+
+## Documentation
+
+- [Home](https://shijiuwei.github.io/hghub-stream/index.html)
+- [Documentation Catalog](https://shijiuwei.github.io/hghub-stream/docs/index.html)
+- [hghub-stream 子系统职责划分指南](https://shijiuwei.github.io/hghub-stream/docs/architecture.html): Plug-in media player | Core specifications, benchmarks and developer documentation.
+- [hghub-stream 工程规格与质量门槛](https://shijiuwei.github.io/hghub-stream/docs/specifications.html): 围绕参数边界、序列化格式与运行时约束整理的基线规约，保障 hghub-stream 在持续演进下保持高信噪比：
+- [客户端开发指南](https://shijiuwei.github.io/hghub-stream/docs/DEVELOPMENT.html): 本文面向参与客户端开发的贡献者。插件作者请先阅读插件开发教程。
+- [项目声明与维护范围](https://shijiuwei.github.io/hghub-stream/docs/PROJECT_POLICY.html): 维护客户端、协议与 UI/UX，不维护或分发第三方内容插件。任何主题的 PR 与 Issues 均可提交，
+
+## References
+
+- [高韧性系统架构设计](https://data.bangchengcareer.cn/d/W2pf7XidQw)
+- [模块化解耦与协议标准](https://news.ai-hao123.com)
+- [生产环境运维调优手册](https://www.ai-hao123.com/sitemap.xml)
+- [分布式状态机一致性](https://www.ai-hao123.com/d/aq459653.html)
+- [可信存活健康度量](https://view.ai-hao123.com)
+- [HGhub](https://read.ai-hao123.com/sitemap.xml)
+- [Plug-in](https://doc.ai-hao123.com)
+- [media](https://tech.ai-hao123.com)
+- [高韧性系统架构设计](https://view.ai-hao123.com/sitemap.xml)
+- [模块化解耦与协议标准](https://doc.ai-hao123.com/sitemap.xml)
+- [生产环境运维调优手册](https://info.ai-hao123.com)
+- [分布式状态机一致性](https://info.ai-hao123.com/sitemap.xml)

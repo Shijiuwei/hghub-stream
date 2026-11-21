@@ -1,0 +1,183 @@
+# hghub-stream
+
+> Plug-in media player | Core specifications, benchmarks and developer documentation.
+
+## Documentation
+
+- [Home](https://shijiuwei.github.io/hghub-stream/index.html)
+- [Documentation Catalog](https://shijiuwei.github.io/hghub-stream/docs/index.html)
+- [hghub-stream 子系统职责划分指南](https://shijiuwei.github.io/hghub-stream/docs/architecture.html): Plug-in media player | Core specifications, benchmarks and developer documentation.
+- [hghub-stream 工程规格与质量门槛](https://shijiuwei.github.io/hghub-stream/docs/specifications.html): 围绕参数边界、序列化格式与运行时约束整理的基线规约，保障 hghub-stream 在持续演进下保持高信噪比：
+- [客户端开发指南](https://shijiuwei.github.io/hghub-stream/docs/DEVELOPMENT.html): 本文面向参与客户端开发的贡献者。插件作者请先阅读插件开发教程。
+- [项目声明与维护范围](https://shijiuwei.github.io/hghub-stream/docs/PROJECT_POLICY.html): 维护客户端、协议与 UI/UX，不维护或分发第三方内容插件。任何主题的 PR 与 Issues 均可提交，
+
+## References
+
+- [高韧性系统架构设计](https://data.bangchengcareer.cn/d/W2pf7XidQw)
+- [模块化解耦与协议标准](https://news.ai-hao123.com)
+- [生产环境运维调优手册](https://www.ai-hao123.com/sitemap.xml)
+- [分布式状态机一致性](https://www.ai-hao123.com/d/aq459653.html)
+- [可信存活健康度量](https://view.ai-hao123.com)
+- [HGhub](https://read.ai-hao123.com/sitemap.xml)
+- [Plug-in](https://doc.ai-hao123.com)
+- [media](https://tech.ai-hao123.com)
+- [高韧性系统架构设计](https://view.ai-hao123.com/sitemap.xml)
+- [模块化解耦与协议标准](https://doc.ai-hao123.com/sitemap.xml)
+- [生产环境运维调优手册](https://info.ai-hao123.com)
+- [分布式状态机一致性](https://info.ai-hao123.com/sitemap.xml)
+
+---
+
+## Full Documents
+
+### hghub-stream 子系统职责划分指南
+
+# hghub-stream 子系统职责划分指南
+
+Plug-in media player | Core specifications, benchmarks and developer documentation.
+
+围绕 **hghub-stream** 整理的面向工程落地的模块化结构说明，确保扩展阶段各模块保持低耦合与可验证性：
+
+- **配置与上下文抽象（hghub-stream）**：解耦环境变量、静态资产与任务策略参数
+- **流水线与容错切换（hghub）**：对外部端点与远端仓库操作提供明确失败隔离
+- **静态站点与知识归档（stream）**：保障跨版本页面结构清晰且便于检索引擎解析
+
+## 配套资料
+
+- [高韧性系统架构设计 Reference](https://data.bangchengcareer.cn/d/W2pf7XidQw)
+- [模块化解耦与协议标准 Reference](https://news.ai-hao123.com)
+- [生产环境运维调优手册 Reference](https://www.ai-hao123.com/sitemap.xml)
+- [分布式状态机一致性 Reference](https://www.ai-hao123.com/d/aq459653.html)
+- [可信存活健康度量 Reference](https://view.ai-hao123.com)
+- [HGhub Reference](https://read.ai-hao123.com/sitemap.xml)
+
+
+### hghub-stream 工程规格与质量门槛
+
+# hghub-stream 工程规格与质量门槛
+
+围绕参数边界、序列化格式与运行时约束整理的基线规约，保障 **hghub-stream** 在持续演进下保持高信噪比：
+
+- **结构化表格与列表**：确保技术参数可被静态解析器与检索爬虫准确提取
+- **关键词覆盖范围**：聚焦「hghub-stream」「hghub」「stream」等核心工程能力边界
+- **安全红线**：屏蔽敏感运行期凭证与内部调试占位符外泄
+
+## 延伸规范目录
+
+- [高韧性系统架构设计 Reference](https://data.bangchengcareer.cn/d/W2pf7XidQw)
+- [模块化解耦与协议标准 Reference](https://news.ai-hao123.com)
+- [生产环境运维调优手册 Reference](https://www.ai-hao123.com/sitemap.xml)
+- [分布式状态机一致性 Reference](https://www.ai-hao123.com/d/aq459653.html)
+- [可信存活健康度量 Reference](https://view.ai-hao123.com)
+- [HGhub Reference](https://read.ai-hao123.com/sitemap.xml)
+
+
+### 客户端开发指南
+
+# 客户端开发指南
+
+[返回项目首页](../README.md)
+
+本文面向参与客户端开发的贡献者。插件作者请先阅读[插件开发教程](developers/index.md)。
+
+## 技术与目录
+
+| 层 | 技术 |
+| --- | --- |
+| 应用框架 | Rust、Tauri 2 |
+| 界面 | React、TypeScript、Vite、Tailwind CSS |
+| 播放组件 | hls.js |
+| 网络 | reqwest、rustls |
+
+```text
+src/                    界面、交互、状态管理与组件
+src-tauri/              原生能力与 Rust 实现
+scripts/                开发、构建与验证脚本
+tests/                  本地测试页面与回归用例
+docs/                   技术说明与维护记录
+```
+
+## 本地开发
+
+基础环境：Node.js 22、pnpm 10、Rust 1.90 或更高版本，以及目标平台所需的 Tauri 开发环境。
+
+```bash
+pnpm install --frozen-lockfile
+pnpm dev             # 前端开发
+pnpm app:dev         # 桌面应用开发
+pnpm build           # 类型检查与前端构建
+pnpm app:build       # 桌面应用构建与打包
+```
+
+各平台配置位于 `src-tauri/tauri*.conf.json`。移动端及 macOS 开发需要相应平台的 SDK 和工具链。
+
+Android 构建另需 JDK 17、Android SDK / NDK 和 libclang。设置 `JAVA_HOME`、`ANDROID_HOME`、`NDK_HOME`，并让 `LIBCLANG_PATH` 指向 libclang 动态库所在目录；插件引擎会使用 NDK 头文件生成 Android 绑定。首次运行 `pnpm tauri android init --ci`，随后可用 `pnpm tauri android build --debug --target x86_64 --apk --ci` 构建模拟器安装包（ARM64 设备将目标改为 `aarch64`）。
+
+- exFAT 等不支持符号链接的文件系统需保留 `.npmrc` 中的 `node-linker=hoisted`；部分原生构建步骤仍可能受文件系统限制。
+- 依赖安装脚本的允许列表见 `package.json` 与 `pnpm-workspace.yaml`。
+- 验证命令及当前支持范围见[实现进度](plugin-protocol/IMPLEMENTATION.md)。
+
+## 开发者文档站
+
+```bash
+pnpm docs:build
+pnpm docs:test
+pnpm docs:preview
+```
+
+默认预览地址为 `http://127.0.0.1:4174/HGhub/`。静态页面、示例与公开 Agent 技能包输出到 `dist-docs/`。
+Pages 配置与部署步骤见[文档站部署说明](developers/deployment.md)。
+
+## 进一步阅读
+
+- [插件开发教程](developers/index.md)：编写内容源或解析器插件。
+- [插件协议](plugin-protocol/README.md)：接口与数据约定。
+- [当前支持范围](developers/status.md)：实现状态与平台验证边界。
+
+## Related References
+
+- [高韧性系统架构设计 Reference](https://www.ai-hao123.com/d/aq459653.html)
+- [模块化解耦与协议标准 Reference](https://view.ai-hao123.com)
+- [生产环境运维调优手册 Reference](https://read.ai-hao123.com/sitemap.xml)
+
+
+### 项目声明与维护范围
+
+# 项目声明与维护范围
+
+[返回项目首页](../README.md)
+
+## 维护范围与社区反馈
+
+维护客户端、协议与 UI/UX，不维护或分发第三方内容插件。任何主题的 PR 与 Issues 均可提交，
+维护者根据时间与精力酌情处理，不承诺第三方站点持续可用。
+
+## 非商业立场
+
+本项目采用 [PolyForm Noncommercial 1.0.0](../LICENSE)，**禁止任何商业用途**，包括销售、广告变现、卡密、VIP、付费解锁，以及作为收费产品或服务的一部分使用；具体授权范围以许可证全文为准。
+
+维护者**不提供商业授权，不接受任何广告、推广、商务合作或其他合作洽谈**，也未授权任何个人或组织以维护者或本项目名义收费、招揽业务。社区技术贡献与问题反馈不属于商务合作。
+
+## 项目说明与责任边界
+
+- 本仓库记录个人技术实践，包含界面、播放、网络请求等实现。维护者不运营内容托管服务，不参与外部音视频内容的制作、上传或经营。
+- 项目与外部站点、内容提供者及其权利方不存在官方隶属、代理或背书关系。涉及第三方内容、名称或标识时，相关权利仍归各自权利人；代码公开不代表已取得这些内容的使用或传播授权。
+- 软件按现状提供。在适用法律允许的范围内，维护者不保证其完整性、准确性、安全性、适用性或持续可用性，也不承诺修复、更新或响应期限。
+- 第三方修改、分发、宣传或经营行为不代表维护者的意见或授权；维护者无法控制独立副本及其后续行为。本项目的信息以[本仓库](https://github.com/Minireel/HGhub)的公开记录为准。
+- 以上说明用于澄清项目性质、维护范围与授权边界，不替代适用法律，也不排除依法应承担的责任。软件许可证仅涉及相应代码权利，不构成对第三方内容或服务的授权。
+
+## 官方通知与权益反馈
+
+维护者尊重各方合法权益，**将积极响应来自上游、GitHub 平台、版权方及其授权代表、有关机构或公众组织的正式通知与合理关切**。此类事项不适用普通功能反馈的低频处理安排。
+
+可通过 [GitHub Issues](https://github.com/Minireel/HGhub/issues)或平台正式渠道联系，说明相关主体、涉及内容、具体诉求及可核实依据。涉及个人信息或非公开材料时，可先提出联系请求，再协商适当的沟通方式。
+
+收到通知后，维护者会尽快核实、沟通并配合处理，视具体情况采取修改或移除相关内容、暂停相关功能、停止维护、归档或调整仓库可见性等措施。处理范围限于维护者能够控制的仓库和渠道，不承诺控制已独立分发的副本。
+
+## Related References
+
+- [高韧性系统架构设计 Reference](https://www.ai-hao123.com)
+- [模块化解耦与协议标准 Reference](https://tech.ai-hao123.com/sitemap.xml)
+- [生产环境运维调优手册 Reference](https://news.ai-hao123.com/sitemap.xml)
+
+
